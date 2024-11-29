@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire</title>
+    <style>
+        /* Styling the Body element 
+        i.e. Color, Font, Alignment */
+        body {
+            background-color: #F5F5DC;
+            font-family: Verdana;
+            text-align: center;
+        }
+
+        /* Styling the Form (Color, Padding, Shadow) */
+        form {
+            background-color: #fff;
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px 20px;
+            box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Styling form-control Class */
+        .form-control {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+        .form-control input,
+        .form-control select,
+        .form-control textarea {
+            border-radius: 8px;
+        }
+        button:hover {
+        background-color: #d3d3d3;
+        cursor: pointer;
+        }
+        button:active {
+        transform: scale(0.95);
+        }
+
+        /* Styling form-control Label */
+        .form-control label {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        /* Styling form-control input, 
+        select, textarea */
+        .form-control input,
+        .form-control select,
+        .form-control textarea {
+            border: 1px solid #777;
+            border-radius: 2px;
+            font-family: inherit;
+            padding: 10px;
+            display: block;
+            width: 95%;
+        }
+
+        /* Styling form-control Radio 
+        button and Checkbox */
+        .form-control input[type="radio"],
+        .form-control input[type="checkbox"] {
+            display: inline-block;
+            width: auto;
+        }
+
+        /* Styling Button */
+        button {
+            background-color: #F5F5DC;
+            border: 1px solid #777;
+            border-radius: 2px;
+            font-family: inherit;
+            font-size: 21px;
+            display: block;
+            width: 100%;
+            margin-top: 50px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Example Questionnaire</h1>
+
+    <!-- Create Form -->
+    <form id="form">
+        <div class="form-control">
+            <label for="name" id="label-name">
+                Open question
+            </label>
+            <input type="text" id="name" placeholder="Enter your name" />
+        </div>
+
+        <div class="form-control">
+            <label for="role" id="label-role">
+                List question?
+            </label>
+            <select name="role" id="role">
+                <option value="student">Answer 1</option>
+                <option value="intern">Answer 2</option>
+                <option value="professional">Answer 3</option>
+                <option value="other">Answer 4</option>
+            </select>
+        </div>
+
+        <div class="form-control">
+            <label>
+                Closed question - One choice
+            </label>
+            <label for="recommend-1">
+                <input type="radio" id="recommend-1" name="recommend" value="A">A
+            </label>
+            <label for="recommend-2">
+                <input type="radio" id="recommend-2" name="recommend" value="B">B
+            </label>
+            <label for="recommend-3">
+                <input type="radio" id="recommend-3" name="recommend" value="C">C
+            </label>
+            <label for="recommend-4">
+                <input type="radio" id="recommend-4" name="recommend" value="D">D
+            </label>
+        </div>
+
+        <div class="form-control">
+            <label>Closed question - Multiple Choice
+                <small>(Check all that apply)</small>
+            </label>
+            <label for="inp-1">
+                <input type="checkbox" id="inp-1" name="inp" value="A">A
+            </label>
+            <label for="inp-2">
+                <input type="checkbox" id="inp-2" name="inp" value="B">B
+            </label>
+            <label for="inp-3">
+                <input type="checkbox" id="inp-3" name="inp" value="C">C
+            </label>
+            <label for="inp-4">
+                <input type="checkbox" id="inp-4" name="inp" value="D">D
+            </label>
+            <label for="inp-5">
+                <input type="checkbox" id="inp-5" name="inp" value="E">E
+            </label>
+        </div>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="results" style="display:none; margin-top: 20px;">
+        <h2>Your Answers</h2>
+        <p id="answer-name"></p>
+        <p id="answer-role"></p>
+        <p id="answer-recommend"></p>
+        <p id="answer-multiple"></p>
+    </div>
+
+    <script>
+        const form = document.getElementById("form");
+        const resultsDiv = document.getElementById("results");
+
+        form.addEventListener("submit", function (event) {
+            event.preventDefault(); // Prevent the default form submission
+
+            // Collect answers
+            const name = document.getElementById("name").value;
+            const role = document.getElementById("role").value;
+
+            const recommend = document.querySelector(
+                'input[name="recommend"]:checked'
+            )?.value || "No answer";
+
+            const multipleChoices = Array.from(
+                document.querySelectorAll('input[name="inp"]:checked')
+            ).map((checkbox) => checkbox.value);
+
+            // Display answers
+            document.getElementById("answer-name").textContent = `Open question: ${name}`;
+            document.getElementById("answer-role").textContent = `List question: ${role}`;
+            document.getElementById("answer-recommend").textContent = `Closed question (one choice): ${recommend}`;
+            document.getElementById("answer-multiple").textContent = `Closed question (multiple choices): ${multipleChoices.join(", ") || "No answers"}`;
+
+            // Show results section
+            resultsDiv.style.display = "block";
+        
+            resultsDiv.scrollIntoView({ behavior: "smooth" });
+        });
+    </script>
+</body>
+
+</html>
