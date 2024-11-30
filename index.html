@@ -703,7 +703,7 @@ window.barChart = new Chart(ctx, {
 
         setTimeout(() => {
             window.scrollTo({
-                top: document.getElementById("bar-chart").offsetTop + document.getElementById("bar-chart").offsetHeight,
+                top: document.getElementById("bar-chart").offsetTop,
                 behavior: "smooth"
             });
         }, 300); // Allow time for rendering
