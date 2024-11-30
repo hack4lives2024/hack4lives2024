@@ -140,9 +140,6 @@
 
         #download-button:hover {
             background-color: #45a049;
-            height:38px; 
-            width:200px;
-            align-items: center;
         }
         @keyframes click-wave {
         0% {
@@ -437,6 +434,7 @@
         <p id="answer-info"></p>
         <p id="answer-alone"></p>
         <p id="answer-rel"></p>
+        <p id="answer-tip"></p>
 </div>
 <div id = general>
 
@@ -541,6 +539,7 @@
         document.getElementById("answer-info").textContent = `Looking for info: ${info}`;
         document.getElementById("answer-alone").textContent = `Work preference: ${alone}`;
         document.getElementById("answer-rel").textContent = `Good relationship with teachers? ${rel}`;
+        document.getElementById("answer-tip").innerHTML = '<b>Did you know:</b> On average, girls are less resistant to stress and exhibit more school performance anxiety before an exam or class than boys.'
         document.getElementById("general").textContent="Hi! These questions were relative to your experiences with anxiety and emotions at school. Abilities related to this domain are known as socioemotional skills or life skills. In 2023 OECD ran a survey in different cities of the world, use our tool below to explore their findings!"
         
 
@@ -573,6 +572,7 @@
         document.getElementById("answer-info").textContent = `Does remote teaching impact socio-emotianal skills? ${info}`;
         document.getElementById("answer-alone").textContent = `Who is more motivated?: ${alone}`;
         document.getElementById("answer-rel").textContent = `Does anxiety influence performance? ${rel}`;
+        document.getElementById("answer-tip").innerHTML = '<b>Did you know:</b> Most teachers believe that online and distance learning hinders social-emotional learning.';
         document.getElementById("general").textContent="The questionnaire you filled out dealt with social and emotional skills. This category refers to all those skills that enable us to manage our emotions, relate to others, handle work and deal with complex situations effectively. In 2023, the OSCE surveyed 15-year-olds from different regions of the world to understand the determinants of these abilities, use the tool below to explore their findings and create nice visualization to address the topic with your students, or use the website with them for an interactive lecture!"
 
         // Hide questionnaire and show answers section
@@ -604,6 +604,7 @@
         document.getElementById("answer-info").textContent = `Does anxiety has an impact on students' performance? ${info}`;
         document.getElementById("answer-alone").textContent = `Did you have good relationship with teahcers? ${alone}`;
         document.getElementById("answer-rel").textContent = `Does the way housework is distributed in the family influences gender stereotypes? ${rel}`;
+        document.getElementById("answer-tip").innerHTML = '<b>Did you know:</b> In Italy, 1 in 5 students say they are not satisfied with their relationship with teachers.'
 
         document.getElementById("general").textContent="The questionnaire you filled out dealt with social and emotional skills. This category refers to all those skills that enable us to manage our emotions, relate to others, handle work and deal with complex situations effectively. In 2023, the OSCE surveyed 15-year-olds from different regions of the world to understand the determinants of these abilities, use the tool below to explore their findings!"
         // Hide questionnaire and show answers section
@@ -629,6 +630,22 @@
     const yVariable = document.getElementById("y-variable").value;
     const xVariable = document.getElementById("x-variable").value;
     const country = document.getElementById("country").value;
+
+    // Define color configuration for customization
+    const colorConfig = {
+        Stress_Resistance: {
+            backgroundColor: ['#33FFFF', '#3399FF','#000099' ], // Custom background colors for Stress Resistance
+            borderColor: ['#33FFFF', '#3399FF','#000099' ], // Custom border colors for Stress Resistance
+        },
+        Optimism: {
+            backgroundColor: ['#33FFFF', '#3399FF','#000099' ], // Custom background colors for Optimism
+            borderColor: ['#33FFFF', '#3399FF','#000099' ], // Custom border colors for Optimism
+        },
+        Creativity: {
+            backgroundColor: ['#33FFFF', '#3399FF','#000099' ], // Custom background colors for Creativity
+            borderColor:['#33FFFF', '#3399FF','#000099' ], // Custom border colors for Creativity
+        }
+    };
 
     // Define configurations for different dependent variables (Y)
     const chartConfig = {
@@ -678,6 +695,9 @@
     const selectedData = config.data[xVariable][country];
     const labels = config.labels[xVariable];
 
+    // Get the colors for the current chart type
+    const colors = colorConfig[yVariable];
+
     // Get the canvas context
     const ctx = document.getElementById('bar-chart').getContext('2d');
 
@@ -694,8 +714,8 @@
             datasets: [{
                 label: `${yVariable} by ${xVariable} in ${country}`,
                 data: selectedData,
-                backgroundColor: labels.map((_, i) => `hsl(${i * 60}, 70%, 50%)`), // Dynamic colors
-                borderColor: labels.map((_, i) => `hsl(${i * 60}, 70%, 40%)`),
+                backgroundColor: colors.backgroundColor, // Use custom background colors
+                borderColor: colors.borderColor, // Use custom border colors
                 borderWidth: 1
             }]
         },
@@ -734,6 +754,8 @@
             } : {}
         }
     });
+});
+
 
     // Dynamic Text Updates
     const textElement = document.getElementById("text-stuff");
@@ -791,7 +813,6 @@
             behavior: "smooth"
         });
     }, 300); // Allow time for rendering
-});
 
 // Download Chart
 document.getElementById("download-button").addEventListener("click", function () {
