@@ -96,6 +96,14 @@
             box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
         }
         #graph-container {
+            
+            height: 80vh;
+            margin-top: 50px;
+            display: none;
+            text-align: center;
+            flex-direction: column;
+        }
+        #text-container {
             height: 80vh;
             margin: 0 auto;
             margin-top: 50px;
@@ -435,7 +443,6 @@
         <label for="x-variable">Choose Variable X:</label>
         <select id="x-variable">
             <option value="Gender">Gender</option>
-            <option value="Sleep">Sleep</option>
             <option value="Immigration">Immigration Status</option>
             <option value="Socio_Economic_Statuts">Socio-Economic Status</option>
         </select>
@@ -451,19 +458,15 @@
 </div>
 
 <div id="graph-container">
-    <canvas style="height: 60vh; width: 40vw; justify-content: center;" id="bar-chart"></canvas>
-    <button id="download-button">Download<button>
-    <h3 id="text-stuff">Why isn tdjscccd
-        asdfsadf
-        asdfsadf
-        asdfsadfsdf
-        sdftext</h3>
-        huj fupa<br>fffffff</br>
-        dddd/n hhhhh
+    <canvas style="height: 40vh !important; width: 40vw !important; justify-content: center;" id="bar-chart"></canvas>
+    <button id="download-button">Download</button>
+    <h3 id="text-stuff"></h3>
+        
 </div>
-<footer>
-    hfddfhhhffhfhfh
-</footer>
+<div id = text-container>
+    <h3 id="text-stuff"></h3>
+</div>
+
 <!-- Bar hfusdfhud Container -->
 
 
@@ -587,10 +590,10 @@
     // Handle Explore More - Show Button Click
     
     // Add event listener to the "Show" button
-document.getElementById("show-button").addEventListener("click", function () {
+    document.getElementById("show-button").addEventListener("click", function () {
     // Show the graph container
     document.getElementById("graph-container").style.display = "flex";
-
+    document.getElementById("text-container").style.display = "flex";
     // Get selected values
     const yVariable = document.getElementById("y-variable").value;
     const xVariable = document.getElementById("x-variable").value;
@@ -599,46 +602,40 @@ document.getElementById("show-button").addEventListener("click", function () {
     // Define configurations for different dependent variables (Y)
     const chartConfig = {
         Stress_Resistance: {
-            type: 'bar', // Use a pie chart for 'anxiety'
+            type: 'bar', // Use a bar chart for Stress_Resistance
             data: {
-                Gender: { Spain: [2.64, 2.25], Italy: [2.51, 1.90] }, // Two categories for gender
-                Sleep: { Spain: [2.50, 2.37, 2.25, 2.21], Italy: [2.29, 2.17, 2.05 ,1.96] }, // Two categories for gender
-                Immigration: { Spain: [2.44, 2.51], Italy: [2.21, 2.27] }, // Two categories for gender
-                Socio_Economic_Statuts: { Spain: [2.42,2.45,2.49], Italy: [2.20, 2.22, 2.23] }, // Two categories for gender
+                Gender: { Spain: [2.64, 2.25], Italy: [2.51, 1.90] },
+                Immigration: { Spain: [2.44, 2.51], Italy: [2.21, 2.27] },
+                Socio_Economic_Statuts: { Spain: [2.42, 2.45, 2.49], Italy: [2.20, 2.22, 2.23] },
             },
             labels: {
                 Gender: ['Male', 'Female'],
-                Sleep: ['a', 'b', 'c', 'd'],
                 Immigration: ['Native', 'Immigrant'],
                 Socio_Economic_Statuts: ['Low', 'Medium', 'High']
             }
         },
         Optimism: {
-            type: 'bar', // Use a pie chart for 'anxiety'
+            type: 'bar', // Use a bar chart for Optimism
             data: {
-                Gender: { Spain: [2.93, 2.55], Italy: [2.78, 2.32] }, // Two categories for gender
-                Sleep: { Spain: [2.77, 2.71, 2.40, 2.60], Italy: [2.66, 2.49, 2.33 ,2.2] }, // Two categories for gender
-                Immigration: { Spain: [2.76, 2.68], Italy: [2.58, 2.49] }, // Two categories for gender
-                Socio_Economic_Statuts: { Spain: [2.64,2.75,2.83], Italy: [2.51, 2.57, 2.62] }, // Two categories for gender
+                Gender: { Spain: [2.93, 2.55], Italy: [2.78, 2.32] },
+                Immigration: { Spain: [2.76, 2.68], Italy: [2.58, 2.49] },
+                Socio_Economic_Statuts: { Spain: [2.64, 2.75, 2.83], Italy: [2.51, 2.57, 2.62] },
             },
             labels: {
                 Gender: ['Male', 'Female'],
-                Sleep: ['a', 'b', 'c', 'd'],
                 Immigration: ['Native', 'Immigrant'],
                 Socio_Economic_Statuts: ['Low', 'Medium', 'High']
             }
         },
         Creativity: {
-            type: 'bar', // Use a pie chart for 'anxiety'
+            type: 'bar', // Use a bar chart for Creativity
             data: {
-                Gender: { Spain: [2.70, 2.67], Italy: [2.63, 2.58] }, // Two categories for gender
-                Sleep: { Spain: [2.71, 2.65, 2.66, 2.57], Italy: [2.64, 2.58, 2.54 ,2.54] }, // Two categories for gender
-                Immigration: { Spain: [2.69, 2.67], Italy: [2.61, 2.61] }, // Two categories for gender
-                Socio_Economic_Statuts: { Spain: [2.61,2.69,2.76], Italy: [2.56, 2.58, 2.70] }, // Two categories for gender
+                Gender: { Spain: [2.70, 2.67], Italy: [2.63, 2.58] },
+                Immigration: { Spain: [2.69, 2.67], Italy: [2.61, 2.61] },
+                Socio_Economic_Statuts: { Spain: [2.61, 2.69, 2.76], Italy: [2.56, 2.58, 2.70] },
             },
             labels: {
                 Gender: ['Male', 'Female'],
-                Sleep: ['a', 'b', 'c', 'd'],
                 Immigration: ['Native', 'Immigrant'],
                 Socio_Economic_Statuts: ['Low', 'Medium', 'High']
             }
@@ -659,65 +656,113 @@ document.getElementById("show-button").addEventListener("click", function () {
     }
 
     // Create a new chart
-    // Create a new chart
-window.barChart = new Chart(ctx, {
-    type: config.type, // Use the chart type defined for Y
-    data: {
-        labels: labels,
-        datasets: [{
-            label: `${yVariable} by ${xVariable} in ${country}`,
-            data: selectedData,
-            backgroundColor: labels.map((_, i) => `hsl(${i * 60}, 70%, 50%)`), // Dynamic colors
-            borderColor: labels.map((_, i) => `hsl(${i * 60}, 70%, 40%)`),
-            borderWidth: 1
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: { display: false }, // Control legend display
-            title: {
-                display: true, // Enable the title
-                text: `${yVariable} by ${xVariable} in ${country}`, // Set the chart title dynamically
-                font: {
-                    size: 16 // Customize font size for the title
-                }
-            }
+    window.barChart = new Chart(ctx, {
+        type: config.type, // Use the chart type defined for Y
+        data: {
+            labels: labels,
+            datasets: [{
+                label: `${yVariable} by ${xVariable} in ${country}`,
+                data: selectedData,
+                backgroundColor: labels.map((_, i) => `hsl(${i * 60}, 70%, 50%)`), // Dynamic colors
+                borderColor: labels.map((_, i) => `hsl(${i * 60}, 70%, 40%)`),
+                borderWidth: 1
+            }]
         },
-        scales: config.type === 'bar' ? {
-            x: {
+        options: {
+            responsive: true,
+            plugins: {
+                legend: { display: false }, // Control legend display
                 title: {
-                    display: true, // Enable x-axis label
-                    text: `${xVariable}`, // Dynamic x-axis label
+                    display: true, // Enable the title
+                    text: `${yVariable} by ${xVariable} in ${country}`, // Set the chart title dynamically
                     font: {
-                        size: 14 // Customize font size for x-axis label
+                        size: 16 // Customize font size for the title
                     }
                 }
             },
-            y: {
-                beginAtZero: true, // Start y-axis at 0
-                title: {
-                    display: true, // Enable y-axis label
-                    text: `${yVariable}`, // Dynamic y-axis label
-                    font: {
-                        size: 14 // Customize font size for y-axis label
+            scales: config.type === 'bar' ? {
+                x: {
+                    title: {
+                        display: true, // Enable x-axis label
+                        text: `${xVariable}`, // Dynamic x-axis label
+                        font: {
+                            size: 14 // Customize font size for x-axis label
+                        }
+                    }
+                },
+                y: {
+                    beginAtZero: true, // Start y-axis at 0
+                    title: {
+                        display: true, // Enable y-axis label
+                        text: `${yVariable}`, // Dynamic y-axis label
+                        font: {
+                            size: 14 // Customize font size for y-axis label
+                        }
                     }
                 }
-            }
-        } : {}
-    }
-});
-
-
-        setTimeout(() => {
-            window.scrollTo({
-                top: document.getElementById("bar-chart").offsetTop,
-                behavior: "smooth"
-            });
-        }, 300); // Allow time for rendering
+            } : {}
+        }
     });
 
-    // Download Chart
+    // Dynamic Text Updates
+    const textElement = document.getElementById("text-stuff");
+
+    const dynamicText = {
+        Stress_Resistance: {
+            Italy: {
+                Gender: `The higher the bar, the higher the capacity to resist stress. It seems that boys are more capable of resisting stressful situations than girls in Italy.`,
+                Immigration: `The higher the bar, the higher the capacity to resist stress. It seems that students with an immigrant background are better at dealing with stressful situations than natives.`,
+                Socio_Economic_Statuts: `The higher the bar, the higher the capacity to resist stress. There is not much variation in stress resistance depending on socioeconomic status in Italy.`,
+            },
+            Spain: {
+                Gender: `The higher the bar, the higher the capacity to resist stress. It seems that boys are more capable of resisting stressful situations than girls in Spain.`,
+                Immigration: `The higher the bar, the higher the capacity to resist stress. It seems that students with an immigrant background are better at dealing with stressful situations than natives.`,
+                Socio_Economic_Statuts: `The higher the bar, the higher the capacity to resist stress. In Spain, it seems that individuals from less disadvantaged background are better at dealing with stressful situations.`,
+            }
+        },
+        Optimism: {
+            Spain: {
+                Gender: `The higher the bar, the higher the level of optimism. As you can see, it seems that in Spain boys are more optimistic than girls.`,
+                Immigration: `The higher the bar, the higher the reported level of optimism. It seems that in Spain natives are slightly more optimistic about their future than individuals with an immigrant background.`,
+                Socio_Economic_Statuts: ` It seems that in Spain individuals from relatively better-off backgrounds are relatively more optimistic about the future than their peers from less advantaged backgrounds.
+`,
+            },
+            Italy: {
+                Gender: `The higher the bar, the higher the level of optimism. As you can see, it seems that in Italy boys are more optimistic than girls.`,
+                Immigration: `The higher the bar, the higher the reported level of optimism. It seems that in Italy natives are slightly more optimistic about their future than individuals with an immigrant background.`,
+                Socio_Economic_Statuts: ` It seems that in Italy individuals from relatively better-off backgrounds are relatively more optimistic about the future than their peers from less advantaged backgrounds.
+`,
+            }
+        },
+        Creativity: {
+            Spain: {
+                Gender: `The higher the bar, the higher the measure of creativity. It seems that both boys are girls are equally creative in Spain.`,
+                Immigration: `The higher the bar, the higher the level of creativity. It seems that in Spain natives and individuals with an immigrant background have the same levels of creativity.`,
+                Socio_Economic_Statuts: `It seems that in Spain individuals from relatively better-off backgrounds are relatively more creative about the future than their peers from less advantaged backgrounds.
+`,
+            },
+            Italy: {
+                Gender: `The higher the bar, the higher the measure of creativity. It seems that both boys are girls are equally creative in Italy.`,
+                Immigration: `The higher the bar, the higher the level of creativity. It seems that in Italy natives and individuals with an immigrant background have the same levels of creativity.`,
+                Socio_Economic_Statuts: `It seems that in Italy individuals from relatively better-off backgrounds are relatively more creative about the future than their peers from less advantaged backgrounds.
+`,
+            }
+        },
+    };
+
+    // Set the dynamic text based on selected options
+    textElement.innerHTML = dynamicText[yVariable][country][xVariable];
+
+    // Smoothly scroll to the chart
+    setTimeout(() => {
+        window.scrollTo({
+            top: document.getElementById("bar-chart").offsetTop,
+            behavior: "smooth"
+        });
+    }, 300); // Allow time for rendering
+});
+
+// Download Chart
 document.getElementById("download-button").addEventListener("click", function () {
     if (window.barChart) { // Ensure you are checking the global chart instance
         const url = window.barChart.toBase64Image(); // Use the global instance
@@ -729,6 +774,7 @@ document.getElementById("download-button").addEventListener("click", function ()
         alert("No chart available to download.");
     }
 });
+
 
     
 </script>
