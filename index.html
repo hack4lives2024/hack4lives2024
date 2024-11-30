@@ -96,11 +96,12 @@
             box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
         }
         #graph-container {
-            height: 100vh;
+            /* height: 100vh; */
             margin: 0 auto;
             margin-top: 50px;
             display: none;
             text-align: center;
+            flex-direction: column;
         }
         footer {
             text-align: center;
@@ -181,10 +182,11 @@
         text-align: center;
         line-height: 40px;
         }
-        #bar-chart {
-            width: 80vw !important; /* Set the canvas width relative to the viewport */
-            height: 100vh !important; /* Set the canvas height relative to the viewport */
-        }
+        /* #bar-chart {
+            width: 40vw !important;
+            height: 80vh !important;
+            justify-content: center;
+        } */
         .option-input:checked::after {
         -webkit-animation: click-wave 0.25s;
         -moz-animation: click-wave 0.25s;
@@ -449,17 +451,20 @@
 </div>
 
 <div id="graph-container">
-    <canvas id="bar-chart"></canvas>
-    <button id="download-button">Download</button>
+    <canvas style="height: 80vh; width: 40vw; justify-content: center;" id="bar-chart"></canvas>
+    <button id="download-button">Download<button>
     <h3 id="text-stuff">Why isn tdjscccd
         asdfsadf
         asdfsadf
         asdfsadfsdf
         sdftext</h3>
-        huj fupa
+        huj fupa<br>fffffff</br>
+        dddd/n hhhhh
 </div>
-
-<!-- Bar Graph Container -->
+<footer>
+    hfddfhhhffhfhfh
+</footer>
+<!-- Bar hfusdfhud Container -->
 
 
 <script>
@@ -584,7 +589,7 @@
     // Add event listener to the "Show" button
 document.getElementById("show-button").addEventListener("click", function () {
     // Show the graph container
-    document.getElementById("graph-container").style.display = "block";
+    document.getElementById("graph-container").style.display = "flex";
 
     // Get selected values
     const yVariable = document.getElementById("y-variable").value;
