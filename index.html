@@ -85,6 +85,13 @@
             background-color: #fff;
             box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
         }
+        #general {
+            display: none;
+            margin-top: 50px;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.2);
+        }
         #answers-section h2 {
             text-align: center;
         }
@@ -133,6 +140,9 @@
 
         #download-button:hover {
             background-color: #45a049;
+            height:38px; 
+            width:200px;
+            align-items: center;
         }
         @keyframes click-wave {
         0% {
@@ -224,7 +234,7 @@
 </head>
 <body>
     <div class="header">
-        <h1 id = "main-name">I Gaspari</h1>
+        <h1 id = "main-name">Ma Tu, Come Ti Vedi?</h1>
 
     </div>   
 
@@ -234,6 +244,7 @@
     <button id="teacher-btn">Teacher</button>
     <button id="student-btn">Student</button>
     <button id="other-btn">Other</button>
+    <br>No personal data are collected.</br>
 </div>
 
 <!-- Student Questionnaire -->
@@ -362,7 +373,7 @@
     <form id="other-form">
         <div class="form-control">
             <label>
-                Do you feel you have a good relationship with your students?
+                Do you think that students' socio-economic background influences their socio-emotional skills?
             </label>
             <label for="anxious-1">
                 <input type="radio" class="option-input radio" id="anxious-1" name="anxious" value="Yes">Yes
@@ -373,7 +384,7 @@
         </div>
         <div class="form-control">
             <label>
-                In your experience, do you think that students' socio-economic background influences their socio-emotional skills? 
+                Do you think that remote teaching influences the learning of socio-emotional skills? 
             </label>
             <label for="job-1">
                 <input type="radio" class="option-input radio" id="job-1" name="job" value="Yes">Yes
@@ -384,7 +395,7 @@
         </div>
         <div class="form-control">
             <label>
-                Do you think remote teaching influences the learning of socio-emotional skills? 
+                Do you believe that anxiety has an impact on students' academic performance?
             </label>
             <label for="info-1">
                 <input type="radio" class="option-input radio" id="info-1" name="info" value="Yes">Yes
@@ -395,7 +406,7 @@
         </div>
         <div class="form-control">
             <label>
-                Among your pupils, do you think girls or boys are more motivated?
+                When you were in high school, did you have a good relationship with your teachers?
             </label>
             <label for="alone-1">
                 <input type="radio" class="option-input radio" id="alone-1" name="alone" value="Girls">Girls
@@ -406,7 +417,7 @@
         </div>
         <div class="form-control">
             <label>
-                Do you think anxiety influences your students' academic performance?
+                Do you think that the way housework is distributed in the family can influence the formation of gender stereotypes?
             </label>
             <label for="rel-1">
                 <input type="radio" class="option-input radio" id="rel-1" name="rel" value="Yes">Yes
@@ -427,12 +438,16 @@
         <p id="answer-alone"></p>
         <p id="answer-rel"></p>
 </div>
+<div id = general>
 
+</div>
+
+</div>
 <!-- Explore More Section -->
 <div id="explore-section">
     <h2>Explore More</h2>
     <div class="form-control">
-        <label for="y-variable">Choose Variable Y:</label>
+        <label for="y-variable">Choose Social Emotional Skill:</label>
         <select id="y-variable">
             <option value="Stress_Resistance">Stress Resistance</option>
             <option value="Optimism">Optimism</option>
@@ -440,7 +455,7 @@
         </select>
     </div>
     <div class="form-control">
-        <label for="x-variable">Choose Variable X:</label>
+        <label for="x-variable">Choose Category:</label>
         <select id="x-variable">
             <option value="Gender">Gender</option>
             <option value="Immigration">Immigration Status</option>
@@ -468,8 +483,19 @@
 </div>
 
 <!-- Bar hfusdfhud Container -->
-
-
+<br></br>
+<p>
+    Realizzato nell’ambito di ‘#Hack4BetterLives: digitally enhanced solutions for the analysis and
+    visualization of the OCSE data on social and emotional skills’ organizzato da Fondazione per la Scuola
+    della Compagnia di San Paolo in collaborazione con EGInA – European Grants International Academy
+    dal 28 novembre al 1 dicembre 2024 presso il Collegio Carlo Alberto a Torino. Dati prevenienti da:
+    Survey on Social and Emotional Skills (SSES) 2023, Organisation for Economic Co-operation and
+    Development (OECD), Paris.
+</p>
+<p>
+    © 2024. This work is openly licensed via 
+    <a href="https://creativecommons.org/licenses/by-nc/4.0/deed.it" target="_blank" rel="noopener noreferrer">CC BY-NC 4.0.</a>
+</p>
 <script>
     let barChart;
     // Handle Teacher Button Click
@@ -515,12 +541,13 @@
         document.getElementById("answer-info").textContent = `Looking for info: ${info}`;
         document.getElementById("answer-alone").textContent = `Work preference: ${alone}`;
         document.getElementById("answer-rel").textContent = `Good relationship with teachers? ${rel}`;
-
+        document.getElementById("general").textContent="Hi! These questions were relative to your experiences with anxiety and emotions at school. Abilities related to this domain are known as socioemotional skills or life skills. In 2023 OECD ran a survey in different cities of the world, use our tool below to explore their findings!"
         
 
         // Hide questionnaire and show answers section
         document.getElementById("student-section").style.display = "none";
         document.getElementById("answers-section").style.display = "block";
+        document.getElementById("general").style.display = "block";
 
         // Show "Explore More" section
         document.getElementById("explore-section").style.display = "block";
@@ -535,21 +562,23 @@
 
         // Get teacher answers
         const anxious = document.querySelector('input[name="anxious"]:checked')?.value || "Not answered";
-        const job = document.getElementById("job").value || "Not answered";
+        const job = document.querySelector('input[name="job"]:checked')?.value || "Not answered";
         const info = document.querySelector('input[name="info"]:checked')?.value || "Not answered";
         const alone = document.querySelector('input[name="alone"]:checked')?.value || "Not answered";
         const rel = document.querySelector('input[name="rel"]:checked')?.value || "Not answered";
 
         // Display answers in the answers section
-        document.getElementById("answer-anxious").textContent = `Do you feel anxious? ${anxious}`;
-        document.getElementById("answer-job").textContent = `Ideal Job: ${job}`;
-        document.getElementById("answer-info").textContent = `Looking for info: ${info}`;
-        document.getElementById("answer-alone").textContent = `Work preference: ${alone}`;
-        document.getElementById("answer-rel").textContent = `Good relationship with teachers? ${rel}`;
+        document.getElementById("answer-anxious").textContent = `Good relationship with students? ${anxious}`;
+        document.getElementById("answer-job").textContent = `Is socio-economic background important?: ${job}`;
+        document.getElementById("answer-info").textContent = `Does remote teaching impact socio-emotianal skills? ${info}`;
+        document.getElementById("answer-alone").textContent = `Who is more motivated?: ${alone}`;
+        document.getElementById("answer-rel").textContent = `Does anxiety influence performance? ${rel}`;
+        document.getElementById("general").textContent="The questionnaire you filled out dealt with social and emotional skills. This category refers to all those skills that enable us to manage our emotions, relate to others, handle work and deal with complex situations effectively. In 2023, the OSCE surveyed 15-year-olds from different regions of the world to understand the determinants of these abilities, use the tool below to explore their findings and create nice visualization to address the topic with your students, or use the website with them for an interactive lecture!"
 
         // Hide questionnaire and show answers section
         document.getElementById("teacher-section").style.display = "none";
         document.getElementById("answers-section").style.display = "block";
+        document.getElementById("general").style.display = "block";
 
         // Show "Explore More" section
         document.getElementById("explore-section").style.display = "block";
@@ -564,21 +593,23 @@
 
         // Get teacher answers
         const anxious = document.querySelector('input[name="anxious"]:checked')?.value || "Not answered";
-        const job = document.getElementById("job").value || "Not answered";
+        const job = document.querySelector('input[name="job"]:checked')?.value || "Not answered";
         const info = document.querySelector('input[name="info"]:checked')?.value || "Not answered";
         const alone = document.querySelector('input[name="alone"]:checked')?.value || "Not answered";
         const rel = document.querySelector('input[name="rel"]:checked')?.value || "Not answered";
 
         // Display answers in the answers section
-        document.getElementById("answer-anxious").textContent = `Do you feel anxious? ${anxious}`;
-        document.getElementById("answer-job").textContent = `Ideal Job: ${job}`;
-        document.getElementById("answer-info").textContent = `Looking for info: ${info}`;
-        document.getElementById("answer-alone").textContent = `Work preference: ${alone}`;
-        document.getElementById("answer-rel").textContent = `Good relationship with teachers? ${rel}`;
+        document.getElementById("answer-anxious").textContent = `Does socio-economic background influences socio-emotional skills? ${anxious}`;
+        document.getElementById("answer-job").textContent = `Does remote teaching influences the learning of socio-emotional skills? ${job}`;
+        document.getElementById("answer-info").textContent = `Does anxiety has an impact on students' performance? ${info}`;
+        document.getElementById("answer-alone").textContent = `Did you have good relationship with teahcers? ${alone}`;
+        document.getElementById("answer-rel").textContent = `Does the way housework is distributed in the family influences gender stereotypes? ${rel}`;
 
+        document.getElementById("general").textContent="The questionnaire you filled out dealt with social and emotional skills. This category refers to all those skills that enable us to manage our emotions, relate to others, handle work and deal with complex situations effectively. In 2023, the OSCE surveyed 15-year-olds from different regions of the world to understand the determinants of these abilities, use the tool below to explore their findings!"
         // Hide questionnaire and show answers section
         document.getElementById("other-section").style.display = "none";
         document.getElementById("answers-section").style.display = "block";
+        document.getElementById("general").style.display = "block";
 
         // Show "Explore More" section
         document.getElementById("explore-section").style.display = "block";
